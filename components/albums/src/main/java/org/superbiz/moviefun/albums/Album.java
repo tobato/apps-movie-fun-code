@@ -49,7 +49,7 @@ public class Album implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -104,5 +104,16 @@ public class Album implements Serializable {
     private static <T> boolean isEqual(T one, T other) {
         if (one != null ? !one.equals(other) : other != null) return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "id=" + id +
+                ", artist='" + artist + '\'' +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", rating=" + rating +
+                '}';
     }
 }

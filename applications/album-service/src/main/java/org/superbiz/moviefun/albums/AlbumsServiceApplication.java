@@ -1,27 +1,24 @@
-package org.superbiz.moviefun;
+package org.superbiz.moviefun.albums;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.superbiz.moviefun.blobstore.BlobStore;
 import org.superbiz.moviefun.blobstore.S3Store;
-import org.superbiz.moviefun.moviesapi.MovieServlet;
 
 @SpringBootApplication
-public class Application {
+@ComponentScan({"org.superbiz.moviefun.albums"})
+public class AlbumsServiceApplication {
 
     public static void main(String... args) {
-        SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public ServletRegistrationBean actionServletRegistration(MovieServlet movieServlet) {
-        return new ServletRegistrationBean(movieServlet, "/moviefun/*");
+        SpringApplication.run(AlbumsServiceApplication.class, args);
     }
 
     @Value("${s3.endpointUrl}") String s3Endpoint;
@@ -37,5 +34,6 @@ public class Application {
         s3Client.setEndpoint(s3Endpoint);
         return new S3Store(s3Client, s3BucketName);
     }
+
 
 }

@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SmokeTest {
 
-    @Test
+    // @Test
     public void smokeTest() {
         RestTemplate restTemplate = new RestTemplate();
 

@@ -1,4 +1,5 @@
-package org.superbiz.moviefun.albums; /**
+package org.superbiz.moviefun.albums;
+/**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -15,6 +16,8 @@ package org.superbiz.moviefun.albums; /**
  * limitations under the License.
  */
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,13 +27,18 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
-public class AlbumsBean {
+public class AlbumsRepository {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     public void addAlbum(Album album) {
+        logger.debug("add-album={}",album);
+        //album.setId(null);
         entityManager.persist(album);
     }
 

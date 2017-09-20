@@ -1,0 +1,15 @@
+server.port: 8081
+
+spring:
+  jpa:
+    generate-ddl: true
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/albums?useSSL=false
+    username: moviefun
+    password: moviefun
+
+logging.level:
+  root: info
+  org.superbiz.moviefun: DEBUG

@@ -29,7 +29,7 @@ import javax.persistence.metamodel.EntityType;
 import java.util.List;
 
 @Repository
-public class MoviesBean {
+public class MoviesRepository {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -101,7 +101,18 @@ public class MoviesBean {
         return entityManager.createQuery(cq).getSingleResult().intValue();
     }
 
-    public List<Movie> findRange(String field, String searchTerm, int firstResult, int maxResults) {
+    public List<Movie> findRangeY(String field, String searchTerm, int firstResult, int maxResults) {
+        System.out.println("===============gogogo===");
+        return null;
+    }
+
+    public List<Movie> findRangeX(String field,String searchTerm,int firstResult) {
+        System.out.println("======gogogo==="+field+"searchTerm="+searchTerm);
+        return null;
+    }
+
+
+    public List<Movie> findRange(String field, String searchTerm, Integer start, Integer pageSize) {
         CriteriaBuilder qb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Movie> cq = qb.createQuery(Movie.class);
         Root<Movie> root = cq.from(Movie.class);
@@ -112,8 +123,9 @@ public class MoviesBean {
 
         cq.where(condition);
         TypedQuery<Movie> q = entityManager.createQuery(cq);
-        q.setMaxResults(maxResults);
-        q.setFirstResult(firstResult);
+
+        q.setMaxResults(pageSize==null?0:pageSize);
+        q.setFirstResult(start==null?0:start);
         return q.getResultList();
     }
 
